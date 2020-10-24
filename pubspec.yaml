@@ -49,5 +49,11 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/
-
-
+  fonts:
+    - family: Pacifico
+      fonts:
+        - asset: fonts/Pacifico-Regular.ttf
+#          style: italic
+    - family: Stat
+      fonts:
+        - asset: fonts/Staatliches-Regular.ttf

@@ -1,10 +1,4 @@
-
 import 'package:flutter/material.dart';
-
-
-
-
-
 
 class SecondRoute extends StatelessWidget {
   @override
