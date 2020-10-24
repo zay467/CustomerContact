@@ -3,7 +3,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 
 import 'Home.dart';
 
-class FirstRoute extends StatelessWidget {
+class MyAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,16 +34,13 @@ class FirstRoute extends StatelessWidget {
           ),
           TyperAnimatedTextKit(
             isRepeatingAnimation: false,
-
             text: ["Generation 2K"],
             speed: Duration(milliseconds: 250),
-
-// pause: Duration(milliseconds: 200),
             alignment: Alignment.center,
             textStyle: TextStyle(fontSize: 50.0, fontFamily: "Stat"),
             onFinished: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SecondRoute()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Home()));
             },
           ),
         ],
