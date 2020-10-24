@@ -7,7 +7,7 @@ class MyAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.teal,
         body: Padding(
       padding: EdgeInsets.all(8.0),
       child: Center(
@@ -16,7 +16,7 @@ class MyAnimation extends StatelessWidget {
           height: 500,
           child: Card(
     shadowColor: Colors.black,
-    color: Colors.teal,
+    color: Colors.white,
 
 
 
