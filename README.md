@@ -1,6 +1,6 @@
 # customer_contact
 
-Customer Contact Informations Manage App
+Customer Contact Informations' management app.
 
 ## Getting Started
 
