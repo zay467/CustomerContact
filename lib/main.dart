@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'Screens/Animation.dart';
+import 'route.dart';
 
 void main() => runApp(
       MaterialApp(
-        home: MyAnimation(),
+        initialRoute: "/",
         debugShowCheckedModeBanner: false,
+        onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );
