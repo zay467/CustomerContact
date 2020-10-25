@@ -34,7 +34,7 @@ class MyAnimation extends StatelessWidget {
             TyperAnimatedTextKit(
               isRepeatingAnimation: false,
               text: ["Generation 2K"],
-              speed: Duration(milliseconds: 250),
+              speed: Duration(milliseconds: 200),
               alignment: Alignment.center,
               textStyle: TextStyle(fontSize: 50.0, fontFamily: "Stat"),
               onFinished: () {
