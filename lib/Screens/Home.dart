@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -67,11 +68,24 @@ class _HomeState extends State<Home> {
                         Row(
                           children: [
                             Expanded(
-                              flex: 6,
                               child: TextField(
-                                style: TextStyle(color: Color(0xFF00D8E7)),
+                                style: TextStyle(
+                                  color: Color(0xFF00D8E7),
+                                ),
                                 cursorColor: Color(0xFF00D8E7),
                                 decoration: InputDecoration(
+                                  hintText: "Search...",
+                                  hintStyle: TextStyle(
+                                    color: Color(0xFF00A8B4),
+                                  ),
+                                  prefixIcon: Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 20.0, right: 15.0),
+                                    child: Icon(
+                                      Icons.search_rounded,
+                                      color: Color(0xFF00D8E7),
+                                    ),
+                                  ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(30.0),
@@ -89,16 +103,9 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                             ),
-                            // Expanded(
-                            //   flex: 1,
-                            //   child: IconButton(
-                            //     icon: Icon(
-                            //       Icons.search,
-                            //       color: Color(0xFF00D8E7),
-                            //       size: 30.0,
-                            //     ),
-                            //   ),
-                            // )
+                            Expanded(
+                              child: Text("Testing"),
+                            ),
                           ],
                         ),
                       ],
