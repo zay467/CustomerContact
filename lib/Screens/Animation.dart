@@ -5,6 +5,7 @@ class MyAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -36,7 +37,11 @@ class MyAnimation extends StatelessWidget {
               text: ["Generation 2K"],
               speed: Duration(milliseconds: 200),
               alignment: Alignment.center,
-              textStyle: TextStyle(fontSize: 50.0, fontFamily: "Stat"),
+              textStyle: TextStyle(
+                fontSize: 50.0,
+                fontFamily: "Stat",
+                color: Color(0xFF00D8E7),
+              ),
               onFinished: () {
                 Navigator.of(context).pushReplacementNamed("/home");
               },
