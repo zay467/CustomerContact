@@ -11,6 +11,20 @@ class _DetailState extends State<Detail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: IconButton(
+          onPressed: ()
+          {
+            Navigator.of(context).pushReplacementNamed("/home");
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: Color(0xFF00D8E7),
+            size: 30.0,
+          ),
+        ),
+      ),
+
       backgroundColor: Colors.white,
       body:  SafeArea(
         child: SingleChildScrollView(
