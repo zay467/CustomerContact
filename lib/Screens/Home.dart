@@ -34,6 +34,10 @@ class _HomeState extends State<Home> {
                     flex: 1,
                     child: Center(
                       child: IconButton(
+                        onPressed: ()
+                        {
+                          Navigator.of(context).pushReplacementNamed("/detail");
+                        },
                         icon: Icon(
                           Icons.add_rounded,
                           color: Color(0xFF00D8E7),
