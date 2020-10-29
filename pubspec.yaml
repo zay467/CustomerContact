@@ -57,3 +57,6 @@ flutter:
     - family: Stat
       fonts:
         - asset: fonts/Staatliches-Regular.ttf
+    - family: Oswald
+      fonts:
+        - asset: fonts/Oswald-Regular.ttf

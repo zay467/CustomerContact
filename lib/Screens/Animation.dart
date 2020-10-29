@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import '../Utilities/Constants.dart';
 
 class MyAnimation extends StatelessWidget {
   @override
@@ -40,7 +41,7 @@ class MyAnimation extends StatelessWidget {
               textStyle: TextStyle(
                 fontSize: 50.0,
                 fontFamily: "Stat",
-                color: Color(0xFF00D8E7),
+                color: signature,
               ),
               onFinished: () {
                 Navigator.of(context).pushReplacementNamed("/home");

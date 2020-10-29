@@ -1,5 +1,8 @@
+import 'package:customer_contact/Components/CustomCards.dart';
+import 'package:customer_contact/Utilities/Constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../Utilities/Data.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -14,10 +17,11 @@ class _HomeState extends State<Home> {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
+              elevation: 24,
               backgroundColor: Colors.black,
               pinned: true,
               // floating: true,
-              expandedHeight: 200.0,
+              expandedHeight: 140.0,
               title: Row(
                 children: [
                   Expanded(
@@ -25,22 +29,19 @@ class _HomeState extends State<Home> {
                     child: Text(
                       "Home",
                       style: TextStyle(
-                          fontFamily: "Stat",
-                          fontSize: 25.0,
-                          color: Color(0xFF00D8E7)),
+                          fontFamily: "Stat", fontSize: 25.0, color: signature),
                     ),
                   ),
                   Expanded(
                     flex: 1,
                     child: Center(
                       child: IconButton(
-                        onPressed: ()
-                        {
+                        onPressed: () {
                           Navigator.of(context).pushReplacementNamed("/detail");
                         },
                         icon: Icon(
                           Icons.add_rounded,
-                          color: Color(0xFF00D8E7),
+                          color: signature,
                           size: 30.0,
                         ),
                       ),
@@ -52,7 +53,7 @@ class _HomeState extends State<Home> {
                       child: IconButton(
                         icon: Icon(
                           Icons.sort,
-                          color: Color(0xFF00D8E7),
+                          color: signature,
                           size: 30.0,
                         ),
                       ),
@@ -72,22 +73,26 @@ class _HomeState extends State<Home> {
                         Row(
                           children: [
                             Expanded(
+                              flex: 2,
                               child: TextField(
+                                onChanged: (e) {
+                                  print(e);
+                                },
                                 style: TextStyle(
-                                  color: Color(0xFF00D8E7),
+                                  color: signature,
                                 ),
-                                cursorColor: Color(0xFF00D8E7),
+                                cursorColor: signature,
                                 decoration: InputDecoration(
                                   hintText: "Search...",
                                   hintStyle: TextStyle(
-                                    color: Color(0xFF00A8B4),
+                                    color: signature,
                                   ),
                                   prefixIcon: Padding(
                                     padding: EdgeInsets.only(
                                         left: 20.0, right: 15.0),
                                     child: Icon(
                                       Icons.search_rounded,
-                                      color: Color(0xFF00D8E7),
+                                      color: signature,
                                     ),
                                   ),
                                   enabledBorder: OutlineInputBorder(
@@ -95,20 +100,44 @@ class _HomeState extends State<Home> {
                                       Radius.circular(30.0),
                                     ),
                                     borderSide: BorderSide(
-                                        color: Color(0xFF00D8E7), width: 2.0),
+                                        color: signature, width: 2.0),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(30.0),
                                     ),
                                     borderSide: BorderSide(
-                                        color: Color(0xFF00D8E7), width: 2.0),
+                                        color: signature, width: 2.0),
                                   ),
                                 ),
                               ),
                             ),
+                            SizedBox(
+                              width: 10,
+                            ),
                             Expanded(
-                              child: Text("Testing"),
+                              flex: 1,
+                              child: RaisedButton(
+                                padding:
+                                    EdgeInsets.only(top: 17.0, bottom: 17.0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                  side: BorderSide(
+                                    color: signature,
+                                  ),
+                                ),
+                                onPressed: () {},
+                                color: signature,
+                                textColor: Colors.black,
+                                child: Text(
+                                  "S e a r c h",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "Stat"),
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -120,51 +149,11 @@ class _HomeState extends State<Home> {
             ),
             // THIS IS JUST TESTING NOT A FINAL DESIGN!!!!!!!!!!!!!!!!!
             SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  Container(
-                    color: Colors.red,
-                    height: 150,
-                    child: Text("Hellllllllllo"),
-                  ),
-                  Container(
-                    color: Colors.red,
-                    height: 150,
-                    child: Text("Hellllllllllo"),
-                  ),
-                  Container(
-                    color: Colors.red,
-                    height: 150,
-                    child: Text("Hellllllllllo"),
-                  ),
-                  Container(
-                    color: Colors.red,
-                    height: 150,
-                    child: Text("Hellllllllllo"),
-                  ),
-                  Container(
-                    color: Colors.red,
-                    height: 150,
-                    child: Text("Hellllllllllo"),
-                  ),
-                  Container(
-                    color: Colors.red,
-                    height: 150,
-                    child: Text("Hellllllllllo"),
-                  ),
-                  Container(
-                    color: Colors.red,
-                    height: 150,
-                    child: Text("Hellllllllllo"),
-                  ),
-                  Container(
-                    color: Colors.red,
-                    height: 150,
-                    child: Text("Hellllllllllo"),
-                  ),
-                ],
-              ),
-            )
+              delegate:
+                  SliverChildBuilderDelegate((BuildContext context, int index) {
+                return CustomCards(data[index]);
+              }, childCount: data.length),
+            ),
           ],
         ),
       ),
