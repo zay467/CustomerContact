@@ -44,7 +44,7 @@ Widget CustomCards(dynamic data) {
                           fit: BoxFit.scaleDown,
                           child: Text(
                             "#${data['id']}",
-                            style: TextStyle(color: signature),
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
                         FittedBox(
@@ -55,7 +55,7 @@ Widget CustomCards(dynamic data) {
                               fontSize: 24,
                               // fontWeight: FontWeight.bold,
                               fontFamily: "Oswald",
-                              color: signature,
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -66,7 +66,7 @@ Widget CustomCards(dynamic data) {
                               Icon(
                                 Icons.phone_forwarded,
                                 size: 20,
-                                color: signature,
+                                color: Colors.white,
                               ),
                               SizedBox(
                                 width: 10,
@@ -78,7 +78,7 @@ Widget CustomCards(dynamic data) {
                                   style: TextStyle(
                                     fontSize: 15.0,
                                     fontFamily: "Oswald",
-                                    color: signature,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),

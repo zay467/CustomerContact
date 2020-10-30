@@ -13,8 +13,7 @@ class _DetailState extends State<Detail> {
     return Scaffold(
       appBar: AppBar(
         title: IconButton(
-          onPressed: ()
-          {
+          onPressed: () {
             Navigator.of(context).pushReplacementNamed("/home");
           },
           icon: Icon(
@@ -24,9 +23,8 @@ class _DetailState extends State<Detail> {
           ),
         ),
       ),
-
       backgroundColor: Colors.white,
-      body:  SafeArea(
+      body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -36,22 +34,21 @@ class _DetailState extends State<Detail> {
                 backgroundImage: AssetImage('images/g2k.jpg'),
               ),
               TextField(
-                cursorColor:Color(0xFF00D8E7) ,
+                cursorColor: Color(0xFF00D8E7),
                 style: TextStyle(
                     fontFamily: "Stat",
                     fontSize: 25.0,
                     color: Color(0xFF00D8E7)),
-                onChanged: (String str){
+                onChanged: (String str) {
                   print(str);
                 },
               ),
               Text(
-
                 'FLUTTER DEVELOPER',
                 style: TextStyle(
                   fontFamily: 'Source Sans Pro',
                   color: Colors.teal.shade100,
-                  fontSize:20.0,
+                  fontSize: 20.0,
                   letterSpacing: 2.5,
                   fontWeight: FontWeight.bold,
                 ),
@@ -61,25 +58,18 @@ class _DetailState extends State<Detail> {
                   width: 200.0,
                   child: Divider(
                     color: Colors.black,
-                  )
-              ),
+                  )),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   height: 100,
                   child: TextField(
-                     decoration: InputDecoration(
-                       hintText: 'Your name',
-                       labelText: 'Name',
-                       labelStyle: TextStyle(
-                         fontSize: 25,
-                         color: Color(0xFF00D8E7)
-                       )
-
-                     ),
-                    cursorColor:Color(0xFF00D8E7) ,
-
-                    onChanged: (String str){
+                    decoration: InputDecoration(
+                        labelText: 'Name',
+                        labelStyle:
+                            TextStyle(fontSize: 25, color: Color(0xFF00D8E7))),
+                    cursorColor: Color(0xFF00D8E7),
+                    onChanged: (String str) {
                       print(str);
                     },
                   ),
@@ -94,15 +84,10 @@ class _DetailState extends State<Detail> {
                     decoration: InputDecoration(
                         hintText: 'Your email',
                         labelText: 'Email',
-                        labelStyle: TextStyle(
-                            fontSize: 25,
-                            color: Color(0xFF00D8E7)
-                        )
-
-                    ),
-                    cursorColor:Color(0xFF00D8E7) ,
-
-                    onChanged: (String str){
+                        labelStyle:
+                            TextStyle(fontSize: 25, color: Color(0xFF00D8E7))),
+                    cursorColor: Color(0xFF00D8E7),
+                    onChanged: (String str) {
                       print(str);
                     },
                   ),
@@ -117,16 +102,10 @@ class _DetailState extends State<Detail> {
                     decoration: InputDecoration(
                         hintText: 'Your phone',
                         labelText: 'Phone',
-
-                        labelStyle: TextStyle(
-                            fontSize: 25,
-                            color: Color(0xFF00D8E7)
-                        )
-
-                    ),
-                    cursorColor:Color(0xFF00D8E7) ,
-
-                    onChanged: (String str){
+                        labelStyle:
+                            TextStyle(fontSize: 25, color: Color(0xFF00D8E7))),
+                    cursorColor: Color(0xFF00D8E7),
+                    onChanged: (String str) {
                       print(str);
                     },
                   ),
@@ -140,15 +119,10 @@ class _DetailState extends State<Detail> {
                     decoration: InputDecoration(
                         hintText: 'Roll call',
                         labelText: 'roll call',
-                        labelStyle: TextStyle(
-                            fontSize: 25,
-                            color: Color(0xFF00D8E7)
-                        )
-
-                    ),
-                    cursorColor:Color(0xFF00D8E7) ,
-
-                    onChanged: (String str){
+                        labelStyle:
+                            TextStyle(fontSize: 25, color: Color(0xFF00D8E7))),
+                    cursorColor: Color(0xFF00D8E7),
+                    onChanged: (String str) {
                       print(str);
                     },
                   ),
@@ -162,35 +136,19 @@ class _DetailState extends State<Detail> {
                     decoration: InputDecoration(
                         hintText: 'Your email',
                         labelText: 'Email',
-                        labelStyle: TextStyle(
-                            fontSize: 25,
-                            color: Color(0xFF00D8E7)
-                        )
-
-                    ),
-                    cursorColor:Color(0xFF00D8E7) ,
-
-                    onChanged: (String str){
+                        labelStyle:
+                            TextStyle(fontSize: 25, color: Color(0xFF00D8E7))),
+                    cursorColor: Color(0xFF00D8E7),
+                    onChanged: (String str) {
                       print(str);
                     },
                   ),
                 ),
               ),
-
-
-
-
-
             ],
           ),
         ),
       ),
     );
   }
-
 }
-
-
-
-
-
