@@ -6,6 +6,7 @@ Widget CustomCards(dynamic data) {
   return Padding(
     padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
     child: Card(
+      color: Color(0xFF333333),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
@@ -41,7 +42,10 @@ Widget CustomCards(dynamic data) {
                       children: [
                         FittedBox(
                           fit: BoxFit.scaleDown,
-                          child: Text("#${data['id']}"),
+                          child: Text(
+                            "#${data['id']}",
+                            style: TextStyle(color: signature),
+                          ),
                         ),
                         FittedBox(
                           fit: BoxFit.scaleDown,
@@ -51,6 +55,7 @@ Widget CustomCards(dynamic data) {
                               fontSize: 24,
                               // fontWeight: FontWeight.bold,
                               fontFamily: "Oswald",
+                              color: signature,
                             ),
                           ),
                         ),
@@ -61,6 +66,7 @@ Widget CustomCards(dynamic data) {
                               Icon(
                                 Icons.phone_forwarded,
                                 size: 20,
+                                color: signature,
                               ),
                               SizedBox(
                                 width: 10,
@@ -72,6 +78,7 @@ Widget CustomCards(dynamic data) {
                                   style: TextStyle(
                                     fontSize: 15.0,
                                     fontFamily: "Oswald",
+                                    color: signature,
                                   ),
                                 ),
                               ),
@@ -84,7 +91,10 @@ Widget CustomCards(dynamic data) {
                 ),
                 Expanded(
                   flex: 1,
-                  child: Icon(Icons.navigate_next_rounded),
+                  child: Icon(
+                    Icons.navigate_next_rounded,
+                    color: signature,
+                  ),
                 ),
               ],
             ),
