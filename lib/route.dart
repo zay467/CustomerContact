@@ -1,5 +1,5 @@
 import 'package:customer_contact/Screens/Home.dart';
-import 'package:customer_contact/Screens/detail.dart';
+import 'package:customer_contact/Screens/Detail.dart';
 import 'package:flutter/material.dart';
 import './Screens/Animation.dart';
 import 'Screens/Error.dart';
