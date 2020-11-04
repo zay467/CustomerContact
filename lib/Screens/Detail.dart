@@ -3,6 +3,8 @@ import 'dart:ui';
 
 import 'package:customer_contact/Components/DetailAppBar.dart';
 import 'package:customer_contact/Utilities/Constants.dart';
+import 'package:customer_contact/Utilities/Data.dart';
+import 'package:customer_contact/database_helper.dart';
 import 'package:flutter/material.dart';
 
 class Detail extends StatefulWidget {
@@ -17,6 +19,7 @@ class _DetailState extends State<Detail> {
   final phoneCon = TextEditingController();
   final emailCon = TextEditingController();
   final addressCon = TextEditingController();
+  List<Map<String,dynamic>>query;
 
   bool nameEmpty = false;
   bool phoneEmpty = false;
@@ -55,6 +58,7 @@ class _DetailState extends State<Detail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: SafeArea(
         child: Material(
           color: Colors.black,
@@ -207,8 +211,10 @@ class _DetailState extends State<Detail> {
                               height: 25,
                             ),
                             Row(
+
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
+
                                 RaisedButton(
                                   padding:
                                       EdgeInsets.only(top: 17.0, bottom: 17.0),
@@ -218,10 +224,25 @@ class _DetailState extends State<Detail> {
                                       color: signature,
                                     ),
                                   ),
-                                  onPressed: () {
+                                  onPressed: () async{
+                                    print(query);
                                     if (editable) {
                                       if (isNameAndPhoneEmpty()) {
-                                        print("Save in DB");
+
+                                        int i=await DatabaseHelper.instance.insert(
+                                          {
+                                            DatabaseHelper.columnName:nameCon.text,
+                                            DatabaseHelper.phone:phoneCon.text,
+                                            DatabaseHelper.mail:emailCon.text,
+                                            DatabaseHelper.address:addressCon.text
+                                          }
+
+                                        );
+                                        List<Map<String,dynamic>>queryRows=await DatabaseHelper.instance.queryAll();
+                                        query=queryRows;
+                                        print(queryRows);
+
+
                                       } else {
                                         print("Don't save");
                                       }
