@@ -1,6 +1,4 @@
-import 'dart:collection';
 import 'dart:ui';
-
 import 'package:customer_contact/Components/DetailAppBar.dart';
 import 'package:customer_contact/Utilities/Constants.dart';
 import 'package:customer_contact/Utilities/Data.dart';
@@ -9,9 +7,10 @@ import 'package:flutter/material.dart';
 
 class Detail extends StatefulWidget {
   final dynamic data;
+  final dynamic refreshDb;
   @override
   _DetailState createState() => _DetailState();
-  Detail({@required this.data});
+  Detail({@required this.data, @required this.refreshDb});
 }
 
 class _DetailState extends State<Detail> {
@@ -19,7 +18,6 @@ class _DetailState extends State<Detail> {
   final phoneCon = TextEditingController();
   final emailCon = TextEditingController();
   final addressCon = TextEditingController();
-  List<Map<String,dynamic>>query;
 
   bool nameEmpty = false;
   bool phoneEmpty = false;
@@ -35,7 +33,7 @@ class _DetailState extends State<Detail> {
       userData = widget.data;
       nameCon.text = userData['name'];
       phoneCon.text = userData['phone'];
-      emailCon.text = userData['gmail'];
+      emailCon.text = userData['mail'];
       addressCon.text = userData['address'];
       editable = false;
       saveNew = false;
@@ -58,7 +56,6 @@ class _DetailState extends State<Detail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: SafeArea(
         child: Material(
           color: Colors.black,
@@ -211,10 +208,8 @@ class _DetailState extends State<Detail> {
                               height: 25,
                             ),
                             Row(
-
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-
                                 RaisedButton(
                                   padding:
                                       EdgeInsets.only(top: 17.0, bottom: 17.0),
@@ -224,34 +219,30 @@ class _DetailState extends State<Detail> {
                                       color: signature,
                                     ),
                                   ),
-                                  onPressed: () async{
-                                    print(query);
+                                  onPressed: () async {
                                     if (editable) {
                                       if (isNameAndPhoneEmpty()) {
-
-                                        int i=await DatabaseHelper.instance.insert(
-                                          {
-                                            DatabaseHelper.columnName:nameCon.text,
-                                            DatabaseHelper.phone:phoneCon.text,
-                                            DatabaseHelper.mail:emailCon.text,
-                                            DatabaseHelper.address:addressCon.text
-                                          }
-
-                                        );
-                                        List<Map<String,dynamic>>queryRows=await DatabaseHelper.instance.queryAll();
-                                        query=queryRows;
-                                        print(queryRows);
-
-
+                                        if (saveNew) {
+                                          int i = await DatabaseHelper.instance
+                                              .insert({
+                                            DatabaseHelper.name: nameCon.text,
+                                            DatabaseHelper.phone: phoneCon.text,
+                                            DatabaseHelper.mail: emailCon.text,
+                                            DatabaseHelper.address:
+                                                addressCon.text
+                                          });
+                                          widget.refreshDb();
+                                          Navigator.of(context).pop();
+                                        } else {
+                                          print("Don't save");
+                                        }
                                       } else {
-                                        print("Don't save");
+                                        setState(
+                                          () {
+                                            editable = true;
+                                          },
+                                        );
                                       }
-                                    } else {
-                                      setState(
-                                        () {
-                                          editable = true;
-                                        },
-                                      );
                                     }
                                   },
                                   color: signature,

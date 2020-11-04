@@ -6,7 +6,7 @@ import 'Screens/Error.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final args = settings.arguments;
+    dynamic args = settings.arguments;
     print(args);
     switch (settings.name) {
       case "/":
@@ -16,7 +16,8 @@ class RouteGenerator {
       case "/detail":
         return MaterialPageRoute(
           builder: (context) => Detail(
-            data: args,
+            data: args["data"],
+            refreshDb: args["refreshDb"],
           ),
         );
 

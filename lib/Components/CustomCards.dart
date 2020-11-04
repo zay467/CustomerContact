@@ -47,7 +47,7 @@ class CustomCards extends StatelessWidget {
                           FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
-                              "#${data['id']}",
+                              "#${data['_id']}",
                               style: TextStyle(color: Colors.white),
                             ),
                           ),

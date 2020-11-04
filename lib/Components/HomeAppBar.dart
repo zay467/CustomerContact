@@ -2,6 +2,8 @@ import 'package:customer_contact/Utilities/Constants.dart';
 import 'package:flutter/material.dart';
 
 class HomeAppBar extends StatelessWidget {
+  final dynamic refreshDb;
+  HomeAppBar({@required this.refreshDb});
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -25,7 +27,8 @@ class HomeAppBar extends StatelessWidget {
             child: Center(
               child: IconButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed("/detail", arguments: {});
+                  Navigator.of(context).pushNamed("/detail",
+                      arguments: {"data": {}, "refreshDb": refreshDb});
                 },
                 icon: Icon(
                   Icons.add_rounded,
