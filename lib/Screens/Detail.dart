@@ -21,6 +21,7 @@ class _DetailState extends State<Detail> {
   bool nameEmpty = false;
   bool phoneEmpty = false;
   bool editable = true;
+  bool saveNew = true;
 
   dynamic userData;
 
@@ -34,6 +35,7 @@ class _DetailState extends State<Detail> {
       emailCon.text = userData['gmail'];
       addressCon.text = userData['address'];
       editable = false;
+      saveNew = false;
     }
   }
 
