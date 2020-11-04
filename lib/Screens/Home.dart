@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   dynamic data;
-  bool gettingDate = false;
+  bool gettingData = false;
   @override
   void initState() {
     super.initState();
@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
     dynamic users = await DatabaseHelper.instance.queryAll();
     setState(() {
       data = users;
-      gettingDate = true;
+      gettingData = true;
     });
   }
 
@@ -40,10 +40,13 @@ class _HomeState extends State<Home> {
             // THIS IS JUST TESTING NOT A FINAL DESIGN!!!!!!!!!!!!!!!!!
 
             SliverList(
-              delegate: gettingDate
+              delegate: gettingData
                   ? SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
-                      return CustomCards(data[index]);
+                      return CustomCards(
+                        data: data[index],
+                        refreshDb: getAllUsers,
+                      );
                     }, childCount: data.length)
                   : SliverChildListDelegate(
                       [

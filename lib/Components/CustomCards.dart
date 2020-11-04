@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 class CustomCards extends StatelessWidget {
   dynamic data;
-  CustomCards(this.data);
+  dynamic refreshDb;
+  CustomCards({@required this.data, @required this.refreshDb});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -97,8 +98,8 @@ class CustomCards extends StatelessWidget {
                     flex: 1,
                     child: IconButton(
                       onPressed: () {
-                        Navigator.of(context)
-                            .pushNamed("/detail", arguments: data);
+                        Navigator.of(context).pushNamed("/detail",
+                            arguments: {"data": data, "refreshDb": refreshDb});
                       },
                       icon: Icon(
                         Icons.navigate_next_rounded,
