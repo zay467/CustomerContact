@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:ui';
 
 import 'package:customer_contact/Components/DetailAppBar.dart';
@@ -5,11 +6,50 @@ import 'package:customer_contact/Utilities/Constants.dart';
 import 'package:flutter/material.dart';
 
 class Detail extends StatefulWidget {
+  final dynamic data;
   @override
   _DetailState createState() => _DetailState();
+  Detail({@required this.data});
 }
 
 class _DetailState extends State<Detail> {
+  final nameCon = TextEditingController();
+  final phoneCon = TextEditingController();
+  final emailCon = TextEditingController();
+  final addressCon = TextEditingController();
+
+  bool nameEmpty = false;
+  bool phoneEmpty = false;
+  bool editable = true;
+
+  dynamic userData;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.data.length != 0) {
+      userData = widget.data;
+      nameCon.text = userData['name'];
+      phoneCon.text = userData['phone'];
+      emailCon.text = userData['gmail'];
+      addressCon.text = userData['address'];
+      editable = false;
+    }
+  }
+
+  bool isNameAndPhoneEmpty() {
+    setState(
+      () {
+        nameCon.text.isEmpty ? nameEmpty = true : nameEmpty = false;
+        phoneCon.text.isEmpty ? phoneEmpty = true : phoneEmpty = false;
+      },
+    );
+    if (!(nameEmpty || phoneEmpty)) {
+      return true;
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +92,8 @@ class _DetailState extends State<Detail> {
                               ),
                             ),
                             TextField(
+                              enabled: editable,
+                              controller: nameCon,
                               style: TextStyle(
                                 color: signature,
                               ),
@@ -62,6 +104,10 @@ class _DetailState extends State<Detail> {
                                 fillColor: Colors.black,
                                 enabledBorder: MyOutLineInputBorder,
                                 focusedBorder: MyOutLineInputBorder,
+                                errorBorder: MyOutLineInputBorder,
+                                focusedErrorBorder: MyOutLineInputBorder,
+                                disabledBorder: MyOutLineInputDisBorder,
+                                errorText: nameEmpty ? "Require !" : null,
                               ),
                             ),
                             SizedBox(
@@ -78,6 +124,8 @@ class _DetailState extends State<Detail> {
                               ),
                             ),
                             TextField(
+                              enabled: editable,
+                              controller: phoneCon,
                               style: TextStyle(
                                 color: signature,
                               ),
@@ -88,6 +136,10 @@ class _DetailState extends State<Detail> {
                                 fillColor: Colors.black,
                                 enabledBorder: MyOutLineInputBorder,
                                 focusedBorder: MyOutLineInputBorder,
+                                errorBorder: MyOutLineInputBorder,
+                                focusedErrorBorder: MyOutLineInputBorder,
+                                disabledBorder: MyOutLineInputDisBorder,
+                                errorText: phoneEmpty ? "Require !" : null,
                               ),
                             ),
                             SizedBox(
@@ -104,6 +156,8 @@ class _DetailState extends State<Detail> {
                               ),
                             ),
                             TextField(
+                              enabled: editable,
+                              controller: emailCon,
                               style: TextStyle(
                                 color: signature,
                               ),
@@ -114,6 +168,7 @@ class _DetailState extends State<Detail> {
                                 fillColor: Colors.black,
                                 enabledBorder: MyOutLineInputBorder,
                                 focusedBorder: MyOutLineInputBorder,
+                                disabledBorder: MyOutLineInputDisBorder,
                               ),
                             ),
                             SizedBox(
@@ -130,21 +185,63 @@ class _DetailState extends State<Detail> {
                               ),
                             ),
                             TextField(
+                              enabled: editable,
+                              controller: addressCon,
                               style: TextStyle(
                                 color: signature,
                               ),
                               cursorColor: signature,
                               keyboardType: TextInputType.multiline,
-                              maxLines: null,
+                              maxLines: 4,
                               decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Colors.black,
                                 enabledBorder: MyOutLineInputBorder,
                                 focusedBorder: MyOutLineInputBorder,
+                                disabledBorder: MyOutLineInputDisBorder,
                               ),
                             ),
                             SizedBox(
-                              height: 400,
+                              height: 25,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                RaisedButton(
+                                  padding:
+                                      EdgeInsets.only(top: 17.0, bottom: 17.0),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30.0),
+                                    side: BorderSide(
+                                      color: signature,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    if (editable) {
+                                      if (isNameAndPhoneEmpty()) {
+                                        print("Save in DB");
+                                      } else {
+                                        print("Don't save");
+                                      }
+                                    } else {
+                                      setState(
+                                        () {
+                                          editable = true;
+                                        },
+                                      );
+                                    }
+                                  },
+                                  color: signature,
+                                  textColor: Colors.black,
+                                  child: Text(
+                                    editable ? "S a v e" : "E d i t",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 24.0,
+                                        fontFamily: "Stat"),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),

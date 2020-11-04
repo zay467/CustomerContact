@@ -8,3 +8,9 @@ const OutlineInputBorder MyOutLineInputBorder = OutlineInputBorder(
   ),
   borderSide: BorderSide(color: signature, width: 2.0),
 );
+const OutlineInputBorder MyOutLineInputDisBorder = OutlineInputBorder(
+  borderRadius: BorderRadius.all(
+    Radius.circular(30.0),
+  ),
+  borderSide: BorderSide(width: 2.0),
+);

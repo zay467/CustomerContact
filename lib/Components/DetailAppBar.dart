@@ -56,11 +56,20 @@ class DetailAppBar extends SliverPersistentHeaderDelegate {
           child: Opacity(
             opacity: (1 - shrinkOffset / expandedHeight),
             child: Card(
+              shape: CircleBorder(),
               elevation: 10,
               child: SizedBox(
                 height: expandedHeight,
                 width: MediaQuery.of(context).size.width / 2,
-                child: FlutterLogo(),
+                child: CircleAvatar(
+                  backgroundColor: signature,
+                  radius: 50,
+                  child: Icon(
+                    Icons.camera_alt,
+                    color: Colors.black,
+                    size: 40,
+                  ),
+                ),
               ),
             ),
           ),

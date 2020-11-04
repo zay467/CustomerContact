@@ -25,7 +25,7 @@ class HomeAppBar extends StatelessWidget {
             child: Center(
               child: IconButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed("/detail");
+                  Navigator.of(context).pushNamed("/detail", arguments: {});
                 },
                 icon: Icon(
                   Icons.add_rounded,
