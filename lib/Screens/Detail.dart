@@ -234,6 +234,14 @@ class _DetailState extends State<Detail> {
                                           widget.refreshDb();
                                           Navigator.of(context).pop();
                                         } else {
+                                          await DatabaseHelper.instance.update({
+                                            DatabaseHelper.name: nameCon.text,
+                                            DatabaseHelper.phone: phoneCon.text,
+                                            DatabaseHelper.mail: emailCon.text,
+                                            DatabaseHelper.address:
+                                            addressCon.text
+
+                                          });
                                           print("Don't save");
                                         }
                                       } else {
