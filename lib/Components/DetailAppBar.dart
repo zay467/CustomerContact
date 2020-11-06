@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class DetailAppBar extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
-
-  DetailAppBar({@required this.expandedHeight});
+  final bool isNew;
+  DetailAppBar({@required this.expandedHeight, @required this.isNew});
 
   @override
   Widget build(
@@ -38,7 +38,7 @@ class DetailAppBar extends SliverPersistentHeaderDelegate {
                 Padding(
                   padding: EdgeInsets.only(top: 8.0),
                   child: Text(
-                    "Detail",
+                    isNew ? "Detail" : "New",
                     style: TextStyle(
                       color: signature,
                       fontFamily: 'Stat',

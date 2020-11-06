@@ -53,6 +53,26 @@ class _DetailState extends State<Detail> {
     return false;
   }
 
+  Future<bool> saveNewUser() async {
+    int i = await DatabaseHelper.instance.insert({
+      DatabaseHelper.name: nameCon.text,
+      DatabaseHelper.phone: phoneCon.text,
+      DatabaseHelper.mail: emailCon.text,
+      DatabaseHelper.address: addressCon.text
+    });
+    return i == 0 ? false : true;
+  }
+
+  Future updateUser() async {
+    await DatabaseHelper.instance.update({
+      DatabaseHelper.idnum: userData["_id"],
+      DatabaseHelper.name: nameCon.text,
+      DatabaseHelper.phone: phoneCon.text,
+      DatabaseHelper.mail: emailCon.text,
+      DatabaseHelper.address: addressCon.text
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +82,7 @@ class _DetailState extends State<Detail> {
           child: CustomScrollView(
             slivers: [
               SliverPersistentHeader(
-                delegate: DetailAppBar(expandedHeight: 200),
+                delegate: DetailAppBar(expandedHeight: 200, isNew: !saveNew),
                 pinned: true,
               ),
               SliverList(
@@ -219,38 +239,23 @@ class _DetailState extends State<Detail> {
                                       color: signature,
                                     ),
                                   ),
-                                  onPressed: () async {
+                                  onPressed: () {
                                     if (editable) {
                                       if (isNameAndPhoneEmpty()) {
                                         if (saveNew) {
-                                          int i = await DatabaseHelper.instance
-                                              .insert({
-                                            DatabaseHelper.name: nameCon.text,
-                                            DatabaseHelper.phone: phoneCon.text,
-                                            DatabaseHelper.mail: emailCon.text,
-                                            DatabaseHelper.address:
-                                                addressCon.text
-                                          });
-                                          widget.refreshDb();
-                                          Navigator.of(context).pop();
+                                          saveNewUser().then(
+                                              (success) => print(success));
                                         } else {
-                                          await DatabaseHelper.instance.update({
-                                            DatabaseHelper.name: nameCon.text,
-                                            DatabaseHelper.phone: phoneCon.text,
-                                            DatabaseHelper.mail: emailCon.text,
-                                            DatabaseHelper.address:
-                                            addressCon.text
-
-                                          });
-                                          print("Don't save");
+                                          updateUser().then(
+                                              (success) => print(success));
                                         }
-                                      } else {
-                                        setState(
-                                          () {
-                                            editable = true;
-                                          },
-                                        );
+                                        widget.refreshDb();
+                                        Navigator.of(context).pop();
                                       }
+                                    } else {
+                                      setState(() {
+                                        editable = !editable;
+                                      });
                                     }
                                   },
                                   color: signature,

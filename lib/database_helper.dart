@@ -7,7 +7,7 @@ class DatabaseHelper {
   static final _dbName = 'customerContact.db';
   static final _dbVersion = 1;
   static final _tableName = 'userInfo';
-  static final _id = '_id';
+  static final idnum = '_id';
   static final imgPath = "imgPath";
   static final name = 'name';
   static final phone = 'phone';
@@ -33,7 +33,7 @@ class DatabaseHelper {
   Future _onCreate(Database db, int version) {
     db.execute('''
     CREATE TABLE $_tableName (
-    $_id INTEGER PRIMARY KEY,
+    $idnum INTEGER PRIMARY KEY,
     $imgPath Text,
     $name TEXT NOT NULL,
     $phone TEXT NOT NULL,
@@ -55,12 +55,12 @@ class DatabaseHelper {
 
   Future update(Map<String, dynamic> row) async {
     Database db = await instance.database;
-    int id = row[_id];
-    return await db.update(_tableName, row, where: '$name=?', whereArgs: [id]);
+    int id = row[idnum];
+    return await db.update(_tableName, row, where: '$idnum=?', whereArgs: [id]);
   }
 
   Future<int> delete(int id) async {
     Database db = await instance.database;
-    return await db.delete(_tableName, where: '$_id=?', whereArgs: [id]);
+    return await db.delete(_tableName, where: '$idnum=?', whereArgs: [id]);
   }
 }
