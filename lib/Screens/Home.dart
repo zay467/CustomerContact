@@ -2,6 +2,8 @@ import 'package:customer_contact/Components/CustomCards.dart';
 import 'package:customer_contact/Components/HomeAppBar.dart';
 import 'package:customer_contact/Utilities/Constants.dart';
 import 'package:customer_contact/database_helper.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:loading_animations/loading_animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -37,25 +39,30 @@ class _HomeState extends State<Home> {
             HomeAppBar(
               refreshDb: getAllUsers,
             ),
-            // THIS IS JUST TESTING NOT A FINAL DESIGN!!!!!!!!!!!!!!!!!
-
             SliverList(
               delegate: gettingData
                   ? SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
-                      return CustomCards(
-                        data: data[index],
-                        refreshDb: getAllUsers,
+                      return AnimationConfiguration.staggeredList(
+                        position: index,
+                        duration: Duration(milliseconds: 400),
+                        child: SlideAnimation(
+                          verticalOffset: 100.0,
+                          child: CustomCards(
+                            data: data[index],
+                            refreshDb: getAllUsers,
+                          ),
+                        ),
                       );
                     }, childCount: data.length)
                   : SliverChildListDelegate(
                       [
                         Center(
-                          child: Text(
-                            "Loading",
-                            style: TextStyle(fontSize: 100, color: signature),
+                          child: LoadingBouncingGrid.circle(
+                            backgroundColor: signature,
+                            duration: Duration(milliseconds: 500),
                           ),
-                        )
+                        ),
                       ],
                     ),
             )

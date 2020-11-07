@@ -60,6 +60,7 @@ class _DetailState extends State<Detail> {
       DatabaseHelper.mail: emailCon.text,
       DatabaseHelper.address: addressCon.text
     });
+
     return i == 0 ? false : true;
   }
 
@@ -71,6 +72,11 @@ class _DetailState extends State<Detail> {
       DatabaseHelper.mail: emailCon.text,
       DatabaseHelper.address: addressCon.text
     });
+  }
+
+  Future<bool> deleteUser() async {
+    int i = await DatabaseHelper.instance.delete(userData["_id"]);
+    return i == 1 ? true : false;
   }
 
   @override
@@ -228,8 +234,39 @@ class _DetailState extends State<Detail> {
                               height: 25,
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
+                              mainAxisAlignment: saveNew
+                                  ? MainAxisAlignment.end
+                                  : MainAxisAlignment.spaceBetween,
                               children: [
+                                if (!saveNew)
+                                  RaisedButton(
+                                    padding: EdgeInsets.only(
+                                        top: 17.0,
+                                        bottom: 17.0,
+                                        left: 10.0,
+                                        right: 10.0),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                      side: BorderSide(
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      deleteUser()
+                                          .then((value) => print(value));
+                                      widget.refreshDb();
+                                      Navigator.of(context).pop();
+                                    },
+                                    color: Colors.red,
+                                    textColor: Colors.black,
+                                    child: Text(
+                                      "D E L E T E",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 24.0,
+                                          fontFamily: "Stat"),
+                                    ),
+                                  ),
                                 RaisedButton(
                                   padding:
                                       EdgeInsets.only(top: 17.0, bottom: 17.0),

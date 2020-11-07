@@ -45,7 +45,7 @@ class DatabaseHelper {
 
   Future<int> insert(Map<String, dynamic> row) async {
     Database db = await instance.database;
-    await db.insert(_tableName, row);
+    return await db.insert(_tableName, row);
   }
 
   Future<List<Map<String, dynamic>>> queryAll() async {

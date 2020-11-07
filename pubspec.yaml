@@ -24,6 +24,8 @@ dependencies:
   flutter:
     sdk: flutter
   animated_splash_screen: ^1.0.1+2
+  flutter_staggered_animations: ^0.1.2
+  loading_animations: ^2.1.0
   animated_text_kit: ^2.4.1
   sqflite:
   path_provider:
