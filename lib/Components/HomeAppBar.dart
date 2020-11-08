@@ -1,9 +1,16 @@
 import 'package:customer_contact/Utilities/Constants.dart';
 import 'package:flutter/material.dart';
 
-class HomeAppBar extends StatelessWidget {
+class HomeAppBar extends StatefulWidget {
   final dynamic refreshDb;
-  HomeAppBar({@required this.refreshDb});
+  final dynamic searchFun;
+  HomeAppBar({@required this.refreshDb, @required this.searchFun});
+  @override
+  _HomeAppBarState createState() => _HomeAppBarState();
+}
+
+class _HomeAppBarState extends State<HomeAppBar> {
+  final searchCon = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -28,7 +35,7 @@ class HomeAppBar extends StatelessWidget {
               child: IconButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed("/detail",
-                      arguments: {"data": {}, "refreshDb": refreshDb});
+                      arguments: {"data": {}, "refreshDb": widget.refreshDb});
                 },
                 icon: Icon(
                   Icons.add_rounded,
@@ -66,8 +73,12 @@ class HomeAppBar extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: TextField(
+                        controller: searchCon,
                         onChanged: (e) {
-                          print(e);
+                          widget.searchFun(e);
+                        },
+                        onSubmitted: (e) {
+                          widget.searchFun(e);
                         },
                         style: TextStyle(
                           color: signature,
@@ -103,7 +114,9 @@ class HomeAppBar extends StatelessWidget {
                             color: signature,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          widget.searchFun(searchCon.text);
+                        },
                         color: signature,
                         textColor: Colors.black,
                         child: Text(

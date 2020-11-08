@@ -14,6 +14,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   dynamic data;
+  dynamic searchUsers;
   bool gettingData = false;
   @override
   void initState() {
@@ -24,9 +25,26 @@ class _HomeState extends State<Home> {
   void getAllUsers() async {
     dynamic users = await DatabaseHelper.instance.queryAll();
     setState(() {
+      searchUsers = users;
       data = users;
       gettingData = true;
     });
+  }
+
+  void search(String q) {
+    data = searchUsers;
+    if (!(q.length == 0)) {
+      dynamic result = data.where((user) =>
+          user['name'].toString().toLowerCase().contains(q.toLowerCase()));
+      print(result);
+      setState(() {
+        data = result.toList();
+      });
+    } else {
+      setState(() {
+        data = searchUsers;
+      });
+    }
   }
 
   @override
@@ -38,6 +56,7 @@ class _HomeState extends State<Home> {
           slivers: [
             HomeAppBar(
               refreshDb: getAllUsers,
+              searchFun: search,
             ),
             SliverList(
               delegate: gettingData
