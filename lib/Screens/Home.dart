@@ -13,22 +13,78 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   dynamic data;
   dynamic searchUsers;
+
   bool gettingData = false;
+  bool isSortByID = true;
   @override
   void initState() {
     super.initState();
     getAllUsers();
   }
 
+  void sortData() {
+    if (isSortByID) {
+      getAllUsers();
+
+      final snackBar = SnackBar(
+        content: Text(
+            'Sorted By ID',
+          style: TextStyle(
+
+          color: Colors.black,)
+        ),
+        duration: Duration(milliseconds: 500),
+        backgroundColor: signature,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
+        behavior: SnackBarBehavior.floating,
+      );
+      _scaffoldKey.currentState.showSnackBar(snackBar);
+      isSortByID = false;
+    } else {
+      getAllUsers();
+
+      final snackBar = SnackBar(
+        content: Text(
+          'Sorted By Name',
+            style: TextStyle(
+
+              color: Colors.black,)
+        ),
+        duration: Duration(milliseconds: 500),
+        backgroundColor: signature,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
+        behavior: SnackBarBehavior.floating,
+      );
+      _scaffoldKey.currentState.showSnackBar(snackBar);
+      isSortByID = true;
+    }
+  }
+
   void getAllUsers() async {
-    dynamic users = await DatabaseHelper.instance.queryAll();
-    setState(() {
-      searchUsers = users;
-      data = users;
-      gettingData = true;
-    });
+    if(isSortByID) {
+      dynamic users = await DatabaseHelper.instance.queryAll(false);
+      setState(() {
+        searchUsers = users;
+        data = users;
+        gettingData = true;
+      });
+    }else
+      {
+        dynamic users = await DatabaseHelper.instance.queryAll(true);
+        setState(() {
+          searchUsers = users;
+          data = users;
+          gettingData = true;
+        });
+      }
+
   }
 
   void search(String q) {
@@ -50,6 +106,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.black,
       body: SafeArea(
         child: CustomScrollView(
@@ -57,6 +114,7 @@ class _HomeState extends State<Home> {
             HomeAppBar(
               refreshDb: getAllUsers,
               searchFun: search,
+              Sorted: sortData,
             ),
             SliverList(
               delegate: gettingData

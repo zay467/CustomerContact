@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class HomeAppBar extends StatefulWidget {
   final dynamic refreshDb;
   final dynamic searchFun;
-  HomeAppBar({@required this.refreshDb, @required this.searchFun});
+  final dynamic Sorted;
+  HomeAppBar({@required this.refreshDb, @required this.searchFun,@required this.Sorted});
   @override
   _HomeAppBarState createState() => _HomeAppBarState();
 }
@@ -49,6 +50,10 @@ class _HomeAppBarState extends State<HomeAppBar> {
             flex: 1,
             child: Center(
               child: IconButton(
+                onPressed: ()
+                {
+                  widget.Sorted();
+                },
                 icon: Icon(
                   Icons.sort,
                   color: signature,

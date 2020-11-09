@@ -26,7 +26,7 @@ class Homeo extends StatelessWidget {
             FlatButton(
                 onPressed: () async {
                   List<Map<String, dynamic>> queryRows =
-                      await DatabaseHelper.instance.queryAll();
+                      await DatabaseHelper.instance.queryAll(true);
                   print(queryRows);
                 },
                 child: Text('query')),
