@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 class HomeAppBar extends StatefulWidget {
   final dynamic refreshDb;
   final dynamic searchFun;
-  final dynamic Sorted;
-  HomeAppBar({@required this.refreshDb, @required this.searchFun,@required this.Sorted});
+  final dynamic sortFun;
+  HomeAppBar(
+      {@required this.refreshDb,
+      @required this.searchFun,
+      @required this.sortFun});
   @override
   _HomeAppBarState createState() => _HomeAppBarState();
 }
@@ -50,9 +53,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
             flex: 1,
             child: Center(
               child: IconButton(
-                onPressed: ()
-                {
-                  widget.Sorted();
+                onPressed: () {
+                  widget.sortFun();
                 },
                 icon: Icon(
                   Icons.sort,
@@ -70,13 +72,13 @@ class _HomeAppBarState extends State<HomeAppBar> {
           width: double.infinity,
           height: double.infinity,
           child: Padding(
-            padding: EdgeInsets.only(left: 15.0, right: 15.0),
+            padding: EdgeInsets.only(left: 20.0, right: 20.0),
             child: Column(
               children: [
                 Row(
                   children: [
                     Expanded(
-                      flex: 2,
+                      // flex: 2,
                       child: TextField(
                         controller: searchCon,
                         onChanged: (e) {
@@ -101,39 +103,53 @@ class _HomeAppBarState extends State<HomeAppBar> {
                               color: signature,
                             ),
                           ),
+                          suffixIcon: Padding(
+                            padding: EdgeInsets.only(right: 10.0),
+                            child: IconButton(
+                              onPressed: () {
+                                searchCon.text = "";
+                                widget.searchFun(searchCon.text);
+                              },
+                              icon: Icon(
+                                Icons.close,
+                                color: signature,
+                              ),
+                            ),
+                          ),
                           enabledBorder: MyOutLineInputBorder,
                           focusedBorder: MyOutLineInputBorder,
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: RaisedButton(
-                        padding: EdgeInsets.only(top: 17.0, bottom: 17.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                          side: BorderSide(
-                            color: signature,
-                          ),
-                        ),
-                        onPressed: () {
-                          widget.searchFun(searchCon.text);
-                        },
-                        color: signature,
-                        textColor: Colors.black,
-                        child: Text(
-                          "S e a r c h",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "Stat"),
-                        ),
-                      ),
-                    ),
+                    // SEARCH BUTTON
+                    // SizedBox(
+                    //   width: 10,
+                    // ),
+                    // Expanded(
+                    //   flex: 1,
+                    //   child: RaisedButton(
+                    //     padding: EdgeInsets.only(top: 17.0, bottom: 17.0),
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(30.0),
+                    //       side: BorderSide(
+                    //         color: signature,
+                    //       ),
+                    //     ),
+                    //     onPressed: () {
+                    //       widget.searchFun(searchCon.text);
+                    //     },
+                    //     color: signature,
+                    //     textColor: Colors.black,
+                    //     child: Text(
+                    //       "S e a r c h",
+                    //       style: TextStyle(
+                    //           color: Colors.black,
+                    //           fontSize: 20.0,
+                    //           fontWeight: FontWeight.bold,
+                    //           fontFamily: "Stat"),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ],

@@ -48,15 +48,14 @@ class DatabaseHelper {
     return await db.insert(_tableName, row);
   }
 
-  Future<List<Map<String, dynamic>>> queryAll(bool or) async {
+  Future<List<Map<String, dynamic>>> queryAllid() async {
     Database db = await instance.database;
-    if (or){
-    return await db.query(_tableName,orderBy: name );
-  }else
-    {
-      return await db.query(_tableName,orderBy: idnum );
-    }
+    return await db.query(_tableName, orderBy: idnum);
+  }
 
+  Future<List<Map<String, dynamic>>> queryAllname() async {
+    Database db = await instance.database;
+    return await db.query(_tableName, orderBy: name);
   }
 
   Future update(Map<String, dynamic> row) async {

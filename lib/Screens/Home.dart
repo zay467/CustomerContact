@@ -28,15 +28,19 @@ class _HomeState extends State<Home> {
   void sortData() {
     if (isSortByID) {
       getAllUsers();
-
       final snackBar = SnackBar(
-        content: Text(
+        width: MediaQuery.of(context).size.width / 2,
+        content: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
             'Sorted By ID',
-          style: TextStyle(
-
-          color: Colors.black,)
+            style: TextStyle(
+                color: Colors.black,
+                fontFamily: "Oswald",
+                fontWeight: FontWeight.bold),
+          ),
         ),
-        duration: Duration(milliseconds: 500),
+        duration: Duration(milliseconds: 600),
         backgroundColor: signature,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(50),
@@ -47,15 +51,19 @@ class _HomeState extends State<Home> {
       isSortByID = false;
     } else {
       getAllUsers();
-
       final snackBar = SnackBar(
-        content: Text(
-          'Sorted By Name',
+        width: MediaQuery.of(context).size.width / 2,
+        content: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            'Sorted By Name',
             style: TextStyle(
-
-              color: Colors.black,)
+                color: Colors.black,
+                fontFamily: "Oswald",
+                fontWeight: FontWeight.bold),
+          ),
         ),
-        duration: Duration(milliseconds: 500),
+        duration: Duration(milliseconds: 600),
         backgroundColor: signature,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(50),
@@ -68,23 +76,14 @@ class _HomeState extends State<Home> {
   }
 
   void getAllUsers() async {
-    if(isSortByID) {
-      dynamic users = await DatabaseHelper.instance.queryAll(false);
-      setState(() {
-        searchUsers = users;
-        data = users;
-        gettingData = true;
-      });
-    }else
-      {
-        dynamic users = await DatabaseHelper.instance.queryAll(true);
-        setState(() {
-          searchUsers = users;
-          data = users;
-          gettingData = true;
-        });
-      }
-
+    dynamic users = isSortByID
+        ? await DatabaseHelper.instance.queryAllid()
+        : await DatabaseHelper.instance.queryAllname();
+    setState(() {
+      searchUsers = users;
+      data = users;
+      gettingData = true;
+    });
   }
 
   void search(String q) {
@@ -114,7 +113,7 @@ class _HomeState extends State<Home> {
             HomeAppBar(
               refreshDb: getAllUsers,
               searchFun: search,
-              Sorted: sortData,
+              sortFun: sortData,
             ),
             SliverList(
               delegate: gettingData

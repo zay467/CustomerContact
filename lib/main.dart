@@ -8,7 +8,5 @@ void main() => runApp(
         initialRoute: "/",
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.generateRoute,
-        // home: Homeo(),
-
       ),
     );
