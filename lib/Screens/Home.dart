@@ -26,53 +26,29 @@ class _HomeState extends State<Home> {
   }
 
   void sortData() {
-    if (isSortByID) {
-      getAllUsers();
-      final snackBar = SnackBar(
-        width: MediaQuery.of(context).size.width / 2,
-        content: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Text(
-            'Sorted By ID',
-            style: TextStyle(
-                color: Colors.black,
-                fontFamily: "Oswald",
-                fontWeight: FontWeight.bold),
-          ),
+    var type = isSortByID ? "ID" : "Name";
+    getAllUsers();
+    final snackBar = SnackBar(
+      width: MediaQuery.of(context).size.width / 2,
+      content: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Text(
+          'Sorted By $type',
+          style: TextStyle(
+              color: Colors.black,
+              fontFamily: "Oswald",
+              fontWeight: FontWeight.bold),
         ),
-        duration: Duration(milliseconds: 600),
-        backgroundColor: signature,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
-        ),
-        behavior: SnackBarBehavior.floating,
-      );
-      _scaffoldKey.currentState.showSnackBar(snackBar);
-      isSortByID = false;
-    } else {
-      getAllUsers();
-      final snackBar = SnackBar(
-        width: MediaQuery.of(context).size.width / 2,
-        content: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Text(
-            'Sorted By Name',
-            style: TextStyle(
-                color: Colors.black,
-                fontFamily: "Oswald",
-                fontWeight: FontWeight.bold),
-          ),
-        ),
-        duration: Duration(milliseconds: 600),
-        backgroundColor: signature,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
-        ),
-        behavior: SnackBarBehavior.floating,
-      );
-      _scaffoldKey.currentState.showSnackBar(snackBar);
-      isSortByID = true;
-    }
+      ),
+      duration: Duration(milliseconds: 600),
+      backgroundColor: signature,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(50),
+      ),
+      behavior: SnackBarBehavior.floating,
+    );
+    _scaffoldKey.currentState.showSnackBar(snackBar);
+    isSortByID = !isSortByID;
   }
 
   void getAllUsers() async {
