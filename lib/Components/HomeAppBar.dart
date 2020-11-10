@@ -15,6 +15,13 @@ class HomeAppBar extends StatefulWidget {
 
 class _HomeAppBarState extends State<HomeAppBar> {
   final searchCon = TextEditingController();
+
+  @override
+  void dispose() {
+    searchCon.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
@@ -72,7 +79,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
           width: double.infinity,
           height: double.infinity,
           child: Padding(
-            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+            padding: EdgeInsets.only(left: 25.0, right: 25.0),
             child: Column(
               children: [
                 Row(

@@ -40,6 +40,14 @@ class _DetailState extends State<Detail> {
     }
   }
 
+  void dispose() {
+    nameCon.dispose();
+    phoneCon.dispose();
+    emailCon.dispose();
+    addressCon.dispose();
+    super.dispose();
+  }
+
   bool isNameAndPhoneEmpty() {
     setState(
       () {
