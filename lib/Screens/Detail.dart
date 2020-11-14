@@ -148,7 +148,7 @@ class _DetailState extends State<Detail> {
                               ),
                             ),
                             SizedBox(
-                              height: 15,
+                              height: 10,
                             ),
                             Padding(
                               padding: EdgeInsets.all(15),
@@ -180,7 +180,7 @@ class _DetailState extends State<Detail> {
                               ),
                             ),
                             SizedBox(
-                              height: 15,
+                              height: 10,
                             ),
                             Padding(
                               padding: EdgeInsets.all(15),
@@ -209,7 +209,7 @@ class _DetailState extends State<Detail> {
                               ),
                             ),
                             SizedBox(
-                              height: 15,
+                              height: 10,
                             ),
                             Padding(
                               padding: EdgeInsets.all(15),

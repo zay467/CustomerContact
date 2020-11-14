@@ -110,19 +110,21 @@ class _HomeAppBarState extends State<HomeAppBar> {
                               color: signature,
                             ),
                           ),
-                          suffixIcon: Padding(
-                            padding: EdgeInsets.only(right: 10.0),
-                            child: IconButton(
-                              onPressed: () {
-                                searchCon.text = "";
-                                widget.searchFun(searchCon.text);
-                              },
-                              icon: Icon(
-                                Icons.close,
-                                color: signature,
-                              ),
-                            ),
-                          ),
+                          suffixIcon: searchCon.text.length > 0
+                              ? Padding(
+                                  padding: EdgeInsets.only(right: 10.0),
+                                  child: IconButton(
+                                    onPressed: () {
+                                      searchCon.text = "";
+                                      widget.searchFun(searchCon.text);
+                                    },
+                                    icon: Icon(
+                                      Icons.close,
+                                      color: signature,
+                                    ),
+                                  ),
+                                )
+                              : null,
                           enabledBorder: MyOutLineInputBorder,
                           focusedBorder: MyOutLineInputBorder,
                         ),
