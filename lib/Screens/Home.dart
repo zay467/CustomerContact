@@ -6,6 +6,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:loading_animations/loading_animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -16,6 +18,7 @@ class _HomeState extends State<Home> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   dynamic data;
   dynamic searchUsers;
+  File imageFile;
 
   bool gettingData = false;
   bool isSortByID = true;
@@ -24,6 +27,7 @@ class _HomeState extends State<Home> {
     super.initState();
     getAllUsers();
   }
+  
 
   void sortData() {
     var type = isSortByID ? "ID" : "Name";
@@ -86,10 +90,13 @@ class _HomeState extends State<Home> {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
+
             HomeAppBar(
               refreshDb: getAllUsers,
               searchFun: search,
               sortFun: sortData,
+
+
             ),
             SliverList(
               delegate: gettingData

@@ -1,10 +1,20 @@
 import 'package:customer_contact/Utilities/Constants.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class DetailAppBar extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
   final bool isNew;
-  DetailAppBar({@required this.expandedHeight, @required this.isNew});
+  final dynamic chooseimg;
+  final File image;
+  BuildContext contex;
+  final dynamic Imagee;
+  DetailAppBar({@required this.expandedHeight, @required this.isNew,@required this.chooseimg,@required this.contex,@required this.Imagee,@required this.image});
+
+
+
+
 
   @override
   Widget build(
@@ -63,11 +73,20 @@ class DetailAppBar extends SliverPersistentHeaderDelegate {
                 width: MediaQuery.of(context).size.width / 2,
                 child: CircleAvatar(
                   backgroundColor: signature,
-                  radius: 50,
-                  child: Icon(
-                    Icons.camera_alt,
-                    color: Colors.black,
-                    size: 40,
+
+
+                  radius: 38,
+                  child: ClipOval(
+                    child: (image!=null)?Image.file(image,fit:BoxFit.fill,width: double.infinity,):IconButton(
+                      icon: Icon(
+                        Icons.camera_alt
+                      ),
+                      onPressed: ()
+                      {
+                        chooseimg(contex);
+                      },
+
+                    ),
                   ),
                 ),
               ),

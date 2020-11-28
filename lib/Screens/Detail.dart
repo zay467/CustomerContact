@@ -4,13 +4,17 @@ import 'package:customer_contact/Utilities/Constants.dart';
 import 'package:customer_contact/Utilities/Data.dart';
 import 'package:customer_contact/database_helper.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+
 
 class Detail extends StatefulWidget {
   final dynamic data;
   final dynamic refreshDb;
+
   @override
   _DetailState createState() => _DetailState();
-  Detail({@required this.data, @required this.refreshDb});
+  Detail({@required this.data, @required this.refreshDb,});
 }
 
 class _DetailState extends State<Detail> {
@@ -23,6 +27,8 @@ class _DetailState extends State<Detail> {
   bool phoneEmpty = false;
   bool editable = true;
   bool saveNew = true;
+  BuildContext contxtt;
+  File imageFile;
 
   dynamic userData;
 
@@ -79,7 +85,57 @@ class _DetailState extends State<Detail> {
       DatabaseHelper.phone: phoneCon.text,
       DatabaseHelper.mail: emailCon.text,
       DatabaseHelper.address: addressCon.text
+
     });
+  }
+  _openGallary (BuildContext context)async
+  {
+    var picture=await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    this.setState(() {
+      imageFile=picture;
+    });
+    Navigator.of(context).pop();
+  }
+  _openCamera(BuildContext context)async
+  {
+    var picture=await ImagePicker.pickImage(source: ImageSource.camera);
+
+    this.setState(() {
+      imageFile=picture;
+    });
+    Navigator.of(context).pop();
+  }
+
+  Future<void> showChoiceDialog(BuildContext context) {
+    return showDialog(context: context, builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Make a Choice"),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: [
+              GestureDetector(
+                  child: Text("Gallary"),
+                  onTap:()
+                  {
+                    _openGallary(context);
+                  }
+              ),
+              Padding(padding: EdgeInsets.all(8.0)),
+              GestureDetector(
+                  child: Text("Camera"),
+                  onTap:()
+                  {
+                    _openCamera(context);
+                  }
+              )
+            ],
+          ),
+        ),
+      );
+
+    },
+    );
   }
 
   Future<bool> deleteUser() async {
@@ -96,7 +152,7 @@ class _DetailState extends State<Detail> {
           child: CustomScrollView(
             slivers: [
               SliverPersistentHeader(
-                delegate: DetailAppBar(expandedHeight: 200, isNew: !saveNew),
+                delegate: DetailAppBar(expandedHeight: 200, isNew: !saveNew,chooseimg: showChoiceDialog,contex: context,image: imageFile),
                 pinned: true,
               ),
               SliverList(

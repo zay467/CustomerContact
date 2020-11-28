@@ -5,10 +5,13 @@ class HomeAppBar extends StatefulWidget {
   final dynamic refreshDb;
   final dynamic searchFun;
   final dynamic sortFun;
+
   HomeAppBar(
       {@required this.refreshDb,
       @required this.searchFun,
-      @required this.sortFun});
+      @required this.sortFun,
+
+      });
   @override
   _HomeAppBarState createState() => _HomeAppBarState();
 }
@@ -46,7 +49,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
               child: IconButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed("/detail",
-                      arguments: {"data": {}, "refreshDb": widget.refreshDb});
+                      arguments: {"data": {}, "refreshDb": widget.refreshDb,});
                 },
                 icon: Icon(
                   Icons.add_rounded,
@@ -61,7 +64,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
             child: Center(
               child: IconButton(
                 onPressed: () {
-                  widget.sortFun();
+                 widget.sortFun();
                 },
                 icon: Icon(
                   Icons.sort,

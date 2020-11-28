@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class DatabaseHelper {
   static final _dbName = 'customerContact.db';
@@ -13,6 +15,7 @@ class DatabaseHelper {
   static final phone = 'phone';
   static final mail = 'mail';
   static final address = 'address';
+
 
   DatabaseHelper._privateConstructor();
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
